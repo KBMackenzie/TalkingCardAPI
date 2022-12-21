@@ -25,7 +25,7 @@ internal class DialogueDummy : PaperTalkingCard
     public string GetEventForCard(string eventName)
     {
         string id = $"{Card.Info.name}_{eventName}";
-        return AllDialogueAdded.Contains(id) ? id : "____dummy";
+        return AllDialogueAdded.Contains(id) ? id : Dummy;
     }
 
     public override string OnDrawnDialogueId
