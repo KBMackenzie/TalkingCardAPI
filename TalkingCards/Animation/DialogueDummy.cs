@@ -1,6 +1,4 @@
 ﻿using DiskCardGame;
-using InscryptionAPI.Card;
-using InscryptionAPI.Helpers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

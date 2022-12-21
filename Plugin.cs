@@ -1,17 +1,10 @@
 using BepInEx;
-using System.IO;
 using HarmonyLib;
-using System;
-using InscryptionAPI.Ascension;
-using BepInEx.Logging;
-using System.Collections.Generic;
-using UnityEngine;
 using TalkingCardAPI.TalkingCards.Animation;
 using TalkingCardAPI.TalkingCards.JSON;
 
 namespace TalkingCardAPI;
 
-// Plugin base:
 [BepInPlugin(PluginGuid, PluginName, PluginVersion)]
 [BepInDependency("cyantist.inscryption.api", BepInDependency.DependencyFlags.HardDependency)]
 [BepInDependency("MADH.inscryption.JSONLoader", BepInDependency.DependencyFlags.SoftDependency)]
@@ -25,7 +18,7 @@ public class Plugin : BaseUnityPlugin
 
     private void Awake()
     {
-        Instance = this; // Make log source.
+        Instance = this;
 
         Harmony harmony = new Harmony("kel.harmony.talkingcardapi");
         harmony.PatchAll();

@@ -1,12 +1,9 @@
 ﻿using DiskCardGame;
 using HarmonyLib;
 using InscryptionAPI.Card;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using TalkingCardAPI.TalkingCards.Animation;
-using TalkingCardAPI.TalkingCards.Helpers;
 using UnityEngine;
 
 #pragma warning disable Publicizer001
