@@ -6,30 +6,31 @@ using InscryptionAPI.Ascension;
 using BepInEx.Logging;
 using System.Collections.Generic;
 using UnityEngine;
+using TalkingCardAPI.TalkingCards.Animation;
 
-namespace TalkingCardAPI
-{
-    // Plugin base:
-    [BepInPlugin(PluginGuid, PluginName, PluginVersion)]
-    [BepInDependency("cyantist.inscryption.api", BepInDependency.DependencyFlags.HardDependency)]
-    public class Plugin : BaseUnityPlugin
-    {   
-        public const string PluginGuid = "kel.inscryption.talkingcardapi";
-        public const string PluginName = "TalkingCardAPI";
-        public const string PluginVersion = "1.0.0.0";
+namespace TalkingCardAPI;
 
-        public static AssetBundle PossumBundle;
+// Plugin base:
+[BepInPlugin(PluginGuid, PluginName, PluginVersion)]
+[BepInDependency("cyantist.inscryption.api", BepInDependency.DependencyFlags.HardDependency)]
+public class Plugin : BaseUnityPlugin
+{   
+    public const string PluginGuid = "kel.inscryption.talkingcardapi";
+    public const string PluginName = "TalkingCardAPI";
+    public const string PluginVersion = "1.0.0.0";
 
-        internal static ManualLogSource myLogger; // Log source.
-        private void Awake() {
+    internal static Plugin? Instance;
 
-            myLogger = Logger; // Make log source.
+    private void Awake()
+    {
+        Instance = this; // Make log source.
 
-            Harmony harmony = new Harmony("kel.harmony.talkingcardapi");
-            harmony.PatchAll();
+        Harmony harmony = new Harmony("kel.harmony.talkingcardapi");
+        harmony.PatchAll();
 
-            PossumBundle = AssetBundle.LoadFromMemory(Properties.Resources.PossumBundle);
-            TalkingPossum.Init();
-        }
+        GeneratePortrait.InitTalkingCards();
     }
+
+    internal static void LogInfo(string message) => Instance?.Logger.LogInfo(message);
+    internal static void LogError(string message) => Instance?.Logger.LogError(message);
 }

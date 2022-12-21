@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace TalkingCardAPI
+namespace TalkingCardAPI.TalkingCards.Helpers
 {
 #nullable enable
     internal static class AssetHelpers
