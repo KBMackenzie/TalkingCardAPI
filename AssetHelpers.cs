@@ -42,7 +42,7 @@ namespace TalkingCardAPI
         public static Sprite MakeSprite(Texture2D tex)
         {
             Rect texRect = new Rect(0, 0, tex.width, tex.height);
-            Vector2 pivot = new Vector2(0.5f, 1f);
+            Vector2 pivot = new Vector2(0.5f, 0f);
             return Sprite.Create(tex, texRect, pivot);
         }
     }

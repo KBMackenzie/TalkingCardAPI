@@ -13,13 +13,17 @@ namespace TalkingCardAPI
 {
     internal class TalkingPossum
     {//A static reference to the talking card's Face object.
-        public static GameObject Face;
+        public static GameObject _Face;
         public static void Init()
         {
             //Loads and sets up the talking card face object.
             #region SetupFace
             //Loads the face GameObject you made in Unity from your custom Asset Bundle via it's gameobject name.
-            Face = Plugin.PossumBundle.LoadAsset<GameObject>("TalkingPrefab");
+            GameObject Face = GameObject.Instantiate(Plugin.PossumBundle.LoadAsset<GameObject>("TalkingPrefab"));
+            GameObject.DontDestroyOnLoad(Face);
+
+            /* No need for a global static variable if you don't destroy on load! ><
+             * I can use this to allow for unique card customizations from one prefab! <3 */
 
             CharacterFace face = Face.AddComponent<CharacterFace>();
             face.anim = Face.transform.Find("Anim").GetComponent<Animator>();
