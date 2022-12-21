@@ -12,19 +12,20 @@ internal class DialogueDummy : PaperTalkingCard
     public static List<string> AllDialogueAdded = new();
 
     public const string Dummy = "___dummy";
-    public static void DummyEvent()
-    {
-        DialogueEventGenerator.GenerateEvent(
-            Dummy,
-            new() { "..." },
-            new() { new() { "..." } }
-        );
-    }
+
+    //public static void DummyEvent()
+    //{
+    //    DialogueEventGenerator.GenerateEvent(
+    //        Dummy,
+    //        new() { "..." },
+    //        new() { new() { "..." } }
+    //    );
+    //}
 
     public string GetEventForCard(string eventName)
     {
         string id = $"{Card.Info.name}_{eventName}";
-        return AllDialogueAdded.Contains(id) ? id : Dummy;
+        return AllDialogueAdded.Contains(id) ? id : "____dummy";
     }
 
     public override string OnDrawnDialogueId

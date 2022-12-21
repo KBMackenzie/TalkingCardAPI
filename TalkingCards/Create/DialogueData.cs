@@ -21,7 +21,7 @@ public class DialogueEventStrings
     }
 
     public DialogueEvent CreateEvent(string cardName) => DialogueEventGenerator.GenerateEvent(
-            $"{cardName}_EventName",
+            $"{cardName}_{eventName}",
             mainLines.Select(x => (CustomLine)x).ToList(),
             repeatLines.Select(x => x.Select(y => (CustomLine)y).ToList()).ToList()
         );

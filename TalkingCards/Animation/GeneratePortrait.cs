@@ -29,18 +29,21 @@ internal static class GeneratePortrait
     }
 
 #pragma warning disable CS8600
+#pragma warning disable CS8603
     public static GameObject New()
     {
         GameObject portrait = GameObject.Instantiate(FacePrefab);
-        portrait!.transform.SetParent(APIPortraits);
+        GameObject.DontDestroyOnLoad(portrait);
+        //portrait!.transform.SetParent(APIPortraits);
         return portrait;
     }
 #pragma warning restore CS8600
+#pragma warning restore CS8603
 
     #region InitGenericPortrait
     private static void LoadPrefab()
     {
-        PortraitBundle = AssetBundle.LoadFromMemory(Properties.Resources.PossumBundle);
+        PortraitBundle = AssetBundle.LoadFromMemory(Properties.Resources.TalkingCardGenericPrefab);
     }
 
     private static void AddAbility()
@@ -51,12 +54,12 @@ internal static class GeneratePortrait
                 typeof(DialogueDummy)
             ).Id;
 
-        DialogueDummy.DummyEvent();
+        //DialogueDummy.DummyEvent();
     }
 
     private static void Portrait()
     {
-        FacePrefab = PortraitBundle!.LoadAsset<GameObject>("TalkingPrefab");
+        FacePrefab = PortraitBundle!.LoadAsset<GameObject>("TalkingCardGenericPrefab");
 
         /* No need for a global static variable if you don't destroy on load! ><
          * I can use this to allow for unique card customizations from one prefab! <3 */

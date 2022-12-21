@@ -139,5 +139,15 @@ namespace TalkingCardAPI.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] TalkingCardGenericPrefab {
+            get {
+                object obj = ResourceManager.GetObject("TalkingCardGenericPrefab", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

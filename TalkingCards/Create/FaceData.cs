@@ -79,21 +79,21 @@ public class EmotionData
         Emission = emission;
     }
 
-    public static implicit operator CharacterFace.EmotionSprites(EmotionData x) => new()
+    public CharacterFace.EmotionSprites MakeEmotion() => new()
     {
-        emotion = x.Emotion,
-        face = x.Face,
+        emotion = Emotion,
+        face = Face,
 
         // Eyes
-        eyesOpen = x.Eyes.Open,
-        eyesClosed = x.Eyes.Closed,
+        eyesOpen = Eyes.Open,
+        eyesClosed = Eyes.Closed,
 
         // Mouth
-        mouthOpen = x.Mouth.Open,
-        mouthClosed = x.Mouth.Closed,
+        mouthOpen = Mouth.Open,
+        mouthClosed = Mouth.Closed,
 
         // Emission
-        eyesOpenEmission = x.Emission,
+        eyesOpenEmission = Emission,
     };
 
     public static Sprite EmptyPortrait => GeneratePortrait.EmptyCardPortrait ?? new Sprite();
