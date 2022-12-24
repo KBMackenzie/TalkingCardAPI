@@ -27,34 +27,34 @@ internal class DialogueDummy : PaperTalkingCard
     }
 
     public override string OnDrawnDialogueId
-        => GetEventForCard("OnDrawnDialogueId");
+        => GetEventForCard("OnDrawn");
 
     public override string OnPlayFromHandDialogueId
-        => GetEventForCard("OnPlayFromHandDialogueId");
+        => GetEventForCard("OnPlayFromHand");
 
     public override string OnAttackedDialogueId
-        => GetEventForCard("OnAttackedDialogueId");
+        => GetEventForCard("OnAttacked");
 
     public override string OnBecomeSelectablePositiveDialogueId
-        => GetEventForCard("OnBecomeSelectablePositiveDialogueId");
+        => GetEventForCard("OnBecomeSelectablePositive");
 
     public override string OnBecomeSelectableNegativeDialogueId
-        => GetEventForCard("OnBecomeSelectableNegativeDialogueId");
+        => GetEventForCard("OnBecomeSelectableNegative");
 
     public override string OnSacrificedDialogueId
-        => GetEventForCard("OnSacrificedDialogueId");
+        => GetEventForCard("OnSacrificed");
 
     public override string OnSelectedForDeckTrialDialogueId
-        => GetEventForCard("OnSelectedForDeckTrialDialogueId");
+        => GetEventForCard("OnSelectedForDeckTrial");
 
     public override string OnSelectedForCardMergeDialogueId
-        => GetEventForCard("OnSelectedForCardMergeDialogueId");
+        => GetEventForCard("OnSelectedForCardMerge");
 
     public override string OnSelectedForCardRemoveDialogueId
-        => GetEventForCard("OnSelectedForCardRemoveDialogueId");
+        => GetEventForCard("OnSelectedForCardRemove");
 
     public override string OnDiscoveredInExplorationDialogueId
-        => GetEventForCard("OnDiscoveredInExplorationDialogueId");
+        => GetEventForCard("OnDiscoveredInExploration");
 
     public override string OnDrawnFallbackDialogueId
     {
@@ -62,8 +62,8 @@ internal class DialogueDummy : PaperTalkingCard
          * However, users will still have the choice of using it if they want to. */
         get
         {
-            string x = GetEventForCard("OnDrawnFallbackDialogueId");
-            return x == DUMMY ? GetEventForCard("OnDrawnDialogueId") : x;
+            string x = GetEventForCard("OnDrawnFallback");
+            return x == DUMMY ? GetEventForCard("OnDrawn") : x;
         }
     }
 
