@@ -34,7 +34,7 @@ internal static class LoadJSON
         catch (Exception)
         {
             Plugin.LogError($"Error loading JSON data from file {Path.GetFileName(file)}!");
-            throw;
+            // throw;
         }
     }
 }
