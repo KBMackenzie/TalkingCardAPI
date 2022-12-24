@@ -43,8 +43,10 @@ public static class TalkingCardCreator
         FaceInfo faceInfo = faceData.FaceInfo ?? BasicInfo();
 
         face.eyes.blinkRate = faceInfo.GetBlinkRate();
-        face.voiceSoundId = GeneratePortrait.VoiceId; //faceInfo.GetVoiceId();
+        face.voiceSoundId = faceInfo.GetVoiceId();
         face.voiceSoundPitch = faceInfo.GetVoicePitch();
+
+        // FileLog.Log($"FaceInfo debug: Card: {faceData.CardName}, voicePitch: {face.voiceSoundPitch} , regular voicePitch variable: {faceInfo.voiceSoundPitch}");
 
         CardInfo? card = LoadCard.Get(faceData.CardName);
         if (card == null) return;

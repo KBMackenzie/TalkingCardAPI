@@ -35,9 +35,9 @@ public class FaceInfo
     /* Yes, I know these names should be capitalized.
      * However... JSON. */
 
-    public float blinkRate { get; set; }
+    public float? blinkRate { get; set; }
     public string? voiceId { get; set; }
-    public float voiceSoundPitch { get; set; }
+    public float? voiceSoundPitch { get; set; }
 
     public FaceInfo(float blinkRate, string? voiceId, float voiceSoundPitch)
     {
@@ -46,8 +46,8 @@ public class FaceInfo
         this.voiceSoundPitch = voiceSoundPitch;
     }
 
-    public float GetBlinkRate() => Mathf.Clamp(blinkRate, 0.1f, 10f);
-    public float GetVoicePitch() => Mathf.Clamp(voiceSoundPitch, 0.1f, 10f);
+    public float GetBlinkRate() => Mathf.Clamp(blinkRate ?? GeneratePortrait.BlinkRate, 0.1f, 10f);
+    public float GetVoicePitch() => Mathf.Clamp(voiceSoundPitch ?? GeneratePortrait.VoicePitch, 0.1f, 10f);
 
     public string GetVoiceId() // Ensure VoiceId is not null and is in list.
         => voiceId == null
