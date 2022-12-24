@@ -87,6 +87,7 @@ I'm going to explain each field in detail below.
 1. female1_voice
 2. cat_voice
 3. kobold_voice
+
 Most talking cards in the game use the first and simply change the pitch.
 
 #### DialogueEvents
