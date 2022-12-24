@@ -6,6 +6,7 @@ using BepInEx;
 using Newtonsoft.Json;
 using HarmonyLib;
 using TalkingCardAPI.TalkingCards.Create;
+using TalkingCardAPI.TalkingCards.Animation;
 
 namespace TalkingCardAPI.TalkingCards.JSON;
 
@@ -25,8 +26,8 @@ internal static class LoadJSON
         {
             TalkingData? talk = JsonConvert.DeserializeObject<TalkingData>(File.ReadAllText(file));
             if (talk == null) return;
-            FileLog.Log($"Loading card: {talk.cardName}");
-            TalkingCardCreator.New(talk.GetFaceData());
+            //FileLog.Log($"Loading card: {talk.cardName}");
+            TalkingCardCreator.New(talk.GetFaceData(), GeneratePortrait.DialogueAbility);
             var dialogueEvents = talk.MakeDialogueEvents();
             dialogueEvents.ForEach(x => TalkingCardCreator.AddToDialogueCache(x?.id));
         }

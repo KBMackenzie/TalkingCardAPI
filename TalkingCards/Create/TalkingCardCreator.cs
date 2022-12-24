@@ -4,20 +4,21 @@ using InscryptionAPI.Card;
 using System.Collections.Generic;
 using System.Linq;
 using TalkingCardAPI.TalkingCards.Animation;
+using TalkingCardAPI.TalkingCards.Helpers;
 using UnityEngine;
 
 #pragma warning disable Publicizer001
 
 namespace TalkingCardAPI.TalkingCards.Create;
 
-internal static class TalkingCardCreator
+public static class TalkingCardCreator
 {
-    public static List<string> AllDialogueAdded => DialogueDummy.AllDialogueAdded;
+    internal static List<string> AllDialogueAdded => DialogueDummy.AllDialogueAdded;
 
-    public static Dictionary<string, GameObject> Reindeer = new();
+    internal static Dictionary<string, GameObject> AnimatedPortraits = new();
 
     #region AnimatedPortrait
-    public static FaceInfo BasicInfo()
+    internal static FaceInfo BasicInfo()
     {
         FaceInfo faceInfo = new FaceInfo(
                 GeneratePortrait.BlinkRate,
@@ -27,11 +28,11 @@ internal static class TalkingCardCreator
         return faceInfo;
     }
 
-    public static void New(FaceData faceData)
+    public static void New(FaceData faceData, SpecialTriggeredAbility talkAbility)
     {
-        if (Reindeer.ContainsKey(faceData.CardName))
+        if (AnimatedPortraits.ContainsKey(faceData.CardName))
         {
-            Plugin.LogError("A face was already added for that card!");
+            Plugin.LogError($"An animated portrait has already been added for card \'{faceData.CardName}\'!");
             return;
         }
 
@@ -42,20 +43,20 @@ internal static class TalkingCardCreator
         FaceInfo faceInfo = faceData.FaceInfo ?? BasicInfo();
 
         face.eyes.blinkRate = faceInfo.GetBlinkRate();
-        face.voiceSoundId = faceInfo.GetVoiceId();
+        face.voiceSoundId = GeneratePortrait.VoiceId; //faceInfo.GetVoiceId();
         face.voiceSoundPitch = faceInfo.GetVoicePitch();
 
-        CardInfo? card = CardLoader.GetCardByName(faceData.CardName);
+        CardInfo? card = LoadCard.Get(faceData.CardName);
         if (card == null) return;
 
-        Reindeer.Add(faceData.CardName, portrait);
+        AnimatedPortraits.Add(faceData.CardName, portrait);
         card.AddAppearances(CardAppearanceBehaviour.Appearance.AnimatedPortrait);
-        card.AddSpecialAbilities(GeneratePortrait.DialogueAbility);
+        card.AddSpecialAbilities(talkAbility);
     }
     #endregion
 
     #region Dialogue
-    public static void AddToDialogueCache(string? id)
+    internal static void AddToDialogueCache(string? id)
     {
         if (id == null) return;
         AllDialogueAdded.Add(id);
@@ -69,10 +70,10 @@ internal static class TalkingCardCreator
         [HarmonyPostfix]
         private static void GetFace(CardInfo __instance, ref GameObject __result)
         {
-            if (!Reindeer.ContainsKey(__instance.name)) return;
+            if (!AnimatedPortraits.ContainsKey(__instance.name)) return;
 
-            __instance.animatedPortrait = Reindeer[__instance.name];
-            __result = Reindeer[__instance.name];
+            __instance.animatedPortrait = AnimatedPortraits[__instance.name];
+            __result = AnimatedPortraits[__instance.name];
         }
     }
 }

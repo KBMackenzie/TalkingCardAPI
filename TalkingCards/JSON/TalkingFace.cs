@@ -20,6 +20,12 @@ public class TalkingData
     public FaceInfo? faceInfo { get; set; }
     public DialogueEventStrings[] dialogueEvents { get; set; }
 
+    public bool A(string x) => x switch
+    {
+
+        _ => false
+    };
+
     public TalkingData(string cardName, string faceSprite, FaceImagePath? eyeSprites = null, FaceImagePath? mouthSprites = null, string? emissionSprites = null, FaceInfo? faceInfo = null, DialogueEventStrings[]? dialogueEvents = null)
     {
         this.cardName = cardName;
@@ -31,14 +37,15 @@ public class TalkingData
         this.dialogueEvents = dialogueEvents ?? new DialogueEventStrings[0];
     }
 
-    public static Sprite EmptyCardPortrait => GeneratePortrait.EmptyCardPortrait ?? new();
+    private static Sprite EmptyCardPortrait => GeneratePortrait.EmptyCardPortrait ?? new();
+    private static (Sprite, Sprite) EmptySprites => (EmptyCardPortrait, EmptyCardPortrait);
 
     public List<EmotionData> GetEmotion() => new()
     {
         new(Emotion.Neutral,
             AssetHelpers.MakeSprite(faceSprite) ?? EmptyCardPortrait,
-            eyeSprites?.GetSprites() ?? (EmptyCardPortrait, EmptyCardPortrait),
-            mouthSprites?.GetSprites() ?? (EmptyCardPortrait, EmptyCardPortrait),
+            eyeSprites?.GetSprites() ?? EmptySprites,
+            mouthSprites?.GetSprites() ?? EmptySprites,
             AssetHelpers.MakeSprite(emissionSprite) ?? EmptyCardPortrait)
     };
 
@@ -59,9 +66,11 @@ public class FaceImagePath
         this.closed = closed;
     }
 
+    private static Sprite EmptyCardPortrait => GeneratePortrait.EmptyCardPortrait ?? new();
+
     public (Sprite open, Sprite closed) GetSprites()
     {
-        Sprite open = AssetHelpers.MakeSprite(this.open) ?? new Sprite();
+        Sprite open = AssetHelpers.MakeSprite(this.open) ?? EmptyCardPortrait;
         Sprite? closed = AssetHelpers.MakeSprite(this.closed);
         return (open, closed ?? open);
     }

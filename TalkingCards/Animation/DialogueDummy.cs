@@ -59,7 +59,7 @@ internal class DialogueDummy : PaperTalkingCard
     public override string OnDrawnFallbackDialogueId
     {
         /* This is a fallback. Thus, I'm making it not required.
-        * However, users will still have the choice of using it if they want to. */
+         * However, users will still have the choice of using it if they want to. */
         get
         {
             string x = GetEventForCard("OnDrawnFallbackDialogueId");

@@ -39,10 +39,10 @@ public class FaceInfo
     public string? voiceId { get; set; }
     public float voiceSoundPitch { get; set; }
 
-    public FaceInfo(float blinkRate, string? voiceID, float voiceSoundPitch)
+    public FaceInfo(float blinkRate, string? voiceId, float voiceSoundPitch)
     {
         this.blinkRate = blinkRate;
-        voiceId = voiceID;
+        this.voiceId = voiceId;
         this.voiceSoundPitch = voiceSoundPitch;
     }
 
@@ -52,11 +52,11 @@ public class FaceInfo
     public string GetVoiceId() // Ensure VoiceId is not null and is in list.
         => voiceId == null
         ? ValidVoiceIds.First()
-        : 
+        : (
             ValidVoiceIds.Contains(voiceId)
             ? voiceId
             : ValidVoiceIds.First()
-        ;
+        );
 }
 
 public class EmotionData
