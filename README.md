@@ -122,6 +122,8 @@ The "eventName" field can have the following strings for triggers:
 | RoyalBoss                  | Plays at the beginning of Royal's boss fight.            |
 | DefaultOpponent            | I am... unsure if this one even works.                   |
 
+# Special Thanks
+Special thanks to Nevernamed (Bt Y#0895) on Discord for his help with setting up talking cards! c:
 
 # Credits
 This project uses [Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json) for parsing JSON data.
