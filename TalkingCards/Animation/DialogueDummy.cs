@@ -11,15 +11,6 @@ internal class DialogueDummy : PaperTalkingCard
 
     public const string DUMMY = "___dummy";
 
-    //public static void DummyEvent()
-    //{
-    //    DialogueEventGenerator.GenerateEvent(
-    //        Dummy,
-    //        new() { "..." },
-    //        new() { new() { "..." } }
-    //    );
-    //}
-
     public string GetEventForCard(string eventName)
     {
         string id = $"{Card.Info.name}_{eventName}";
