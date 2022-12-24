@@ -73,6 +73,7 @@ I'm going to explain each field in detail below.
 | mouthSprites   | The path to the images for your card's mouth: open and closed, respectively. |
 | emissionSprite | The path to an image for your card's eye emission.                           |
 | faceInfo       | A bunch of details about your card, which will be explained below.           |
+| dialogueEvents | The dialogue for your card. Will be explained more in depth below.           |
 
 #### FaceInfo
 
