@@ -113,11 +113,6 @@ internal static class GeneratePortrait
         GameObject apiPortraits = new GameObject("API_Portraits");
         GameObject.DontDestroyOnLoad(apiPortraits);
         APIPortraits = apiPortraits.transform;
-
-        //CardInfo stoat = CardManager.New("kel", "PossumTalking", "Stoat", 1, 3);
-        //stoat.animatedPortrait = FacePrefab;
-        //stoat.AddAppearances(CardAppearanceBehaviour.Appearance.AnimatedPortrait);
-        //stoat.AddSpecialAbilities(ability);
     }
     #endregion
 }
