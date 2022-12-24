@@ -122,6 +122,7 @@ The "eventName" field can have the following strings for triggers:
 | RoyalBoss                  | Plays at the beginning of Royal's boss fight.            |
 | DefaultOpponent            | I am... unsure if this one even works.                   |
 
+
 # Credits
 This project uses [Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json) for parsing JSON data.
 
