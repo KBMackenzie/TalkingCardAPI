@@ -121,27 +121,6 @@
   <data name="EmptyCardPortrait" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\EmptySprite.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="PossumBundle" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\talkingpossum1;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Possum_Body" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\Possum_Body.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Possum_Eyes_Closed" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\Possum_Eyes_Closed.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Possum_Eyes_Emission" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\Possum_Eyes_Emission.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Possum_Eyes_Open" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\Possum_Eyes_Open.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Possum_Mouth_Closed" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\Possum_Mouth_Closed.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Possum_Mouth_Open" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\Possum_Mouth_Open.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="TalkingCardGenericPrefab" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\talkingcardgenericprefab;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
