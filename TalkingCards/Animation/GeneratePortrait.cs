@@ -50,7 +50,7 @@ internal static class GeneratePortrait
     {
         DialogueAbility = SpecialTriggeredAbilityManager.Add(
                 Plugin.PluginGuid,
-                "CustomStoatTalker",
+                "TalkingCardAPI_",
                 typeof(DialogueDummy)
             ).Id;
 
