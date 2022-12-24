@@ -9,7 +9,7 @@ internal class DialogueDummy : PaperTalkingCard
 {
     public static List<string> AllDialogueAdded = new();
 
-    public const string Dummy = "___dummy";
+    public const string DUMMY = "___dummy";
 
     //public static void DummyEvent()
     //{
@@ -23,7 +23,7 @@ internal class DialogueDummy : PaperTalkingCard
     public string GetEventForCard(string eventName)
     {
         string id = $"{Card.Info.name}_{eventName}";
-        return AllDialogueAdded.Contains(id) ? id : Dummy;
+        return AllDialogueAdded.Contains(id) ? id : DUMMY;
     }
 
     public override string OnDrawnDialogueId
@@ -63,7 +63,7 @@ internal class DialogueDummy : PaperTalkingCard
         get
         {
             string x = GetEventForCard("OnDrawnFallbackDialogueId");
-            return x == Dummy ? GetEventForCard("OnDrawnDialogueId") : x;
+            return x == DUMMY ? GetEventForCard("OnDrawnDialogueId") : x;
         }
     }
 
