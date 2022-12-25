@@ -9,7 +9,7 @@ namespace TalkingCardAPI.TalkingCards.Create;
 [HarmonyPatch]
 internal static class ColorManager
 {
-    internal static Dictionary<string, Color> ColorsCache = new();
+    private static readonly Dictionary<string, Color> ColorsCache = new();
 
     private static string[] BaseGameColorIds =
     {
