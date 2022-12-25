@@ -44,4 +44,33 @@ internal static class AssetHelpers
         Vector2 pivot = new Vector2(0.5f, 0f);
         return Sprite.Create(tex, texRect, pivot);
     }
+
+    internal static Color32 HexToColor(string hex)
+    {
+        Queue<char> chars = new Queue<char>(hex.Trim());
+        if (chars.Count == 0) return default;
+        if (chars.Peek() == '#') chars.Dequeue();
+
+        if (chars.Count < 6)
+        {
+            Plugin.LogError($"Invalid hexcode: {hex}");
+            return Color.white;
+        }
+
+        // I could have used a List<byte>, but this is a tiny bit faster.
+        // (And I know exactly how many items I'll need, anyway.)
+        byte[] rgb = new byte[3];
+
+        for (int i = 0; i < 3; i++)
+        {
+            StringBuilder sb = new();
+            sb.Append(chars.Dequeue());
+            sb.Append(chars.Dequeue());
+
+            byte x = Convert.ToByte(sb.ToString(), 16);
+            rgb[i] = x;
+        }
+
+        return new(rgb[0], rgb[1], rgb[2], 255);
+    }
 }

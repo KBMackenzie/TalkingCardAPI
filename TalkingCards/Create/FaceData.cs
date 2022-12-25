@@ -25,12 +25,7 @@ public class FaceData
 [Serializable]
 public class FaceInfo
 {
-    internal static readonly string[] ValidVoiceIds = new string[]
-    {
-        "female1_voice",
-        "kobold_voice",
-        "cat_voice"
-    };
+    private static string[] ValidVoiceIds => VoiceManager.ValidVoiceIds;
 
     /* Yes, I know these names should be capitalized.
      * However... JSON. */
@@ -38,22 +33,35 @@ public class FaceInfo
     public float? blinkRate { get; set; }
     public string? voiceId { get; set; }
     public float? voiceSoundPitch { get; set; }
+    public string? customVoice { get; set; }
 
-    public FaceInfo(float blinkRate, string? voiceId, float voiceSoundPitch)
+    public FaceInfo(float blinkRate, string? voiceId, float voiceSoundPitch, string? customVoice = null)
     {
         this.blinkRate = blinkRate;
         this.voiceId = voiceId;
         this.voiceSoundPitch = voiceSoundPitch;
+        this.customVoice = customVoice;
     }
 
-    public float GetBlinkRate() => Mathf.Clamp(blinkRate ?? GeneratePortrait.BlinkRate, 0.1f, 10f);
-    public float GetVoicePitch() => Mathf.Clamp(voiceSoundPitch ?? GeneratePortrait.VoicePitch, 0.1f, 10f);
+    public float GetBlinkRate()
+        => Mathf.Clamp(blinkRate ?? GeneratePortrait.BlinkRate, 0.1f, 10f);
 
-    public string GetVoiceId() // Ensure VoiceId is not null and is in list.
-        => voiceId == null
-        ? ValidVoiceIds.First()
-        : (
-            ValidVoiceIds.Contains(voiceId)
+    public float GetVoicePitch()
+        => Mathf.Clamp(voiceSoundPitch ?? GeneratePortrait.VoicePitch, 0.1f, 10f);
+
+    private bool IsValidVoiceId(string? id)
+        => id != null && ValidVoiceIds.Contains(id);
+
+    private string? CustomVoice()
+    {
+        bool result = VoiceManager.Add(customVoice);
+        return result ? customVoice : null;
+    }
+
+    public string GetVoiceId()
+        => CustomVoice()
+        ?? (
+            (voiceId != null && ValidVoiceIds.Contains(voiceId))
             ? voiceId
             : ValidVoiceIds.First()
         );

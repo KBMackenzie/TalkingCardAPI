@@ -46,7 +46,8 @@ Your JSON file should look like this:
   "faceInfo": {
     "blinkRate": 1.5,
     "voiceId": "female1_voice",
-    "voiceSoundPitch": 1
+    "voiceSoundPitch": 1,
+    "customVoice": ""
   },
   "dialogueEvents": [
     {

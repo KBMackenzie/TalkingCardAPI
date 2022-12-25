@@ -3,7 +3,9 @@ using InscryptionAPI.Sound;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
+using TalkingCardAPI.TalkingCards.Animation;
 using TalkingCardAPI.TalkingCards.Helpers;
 using UnityEngine;
 
@@ -14,12 +16,37 @@ internal static class VoiceManager
 {
     private static readonly List<AudioClip> Voices = new();
 
-    public static void Add(string soundPath, string? soundId)
+    public static readonly string[] ValidVoiceIds = new string[]
     {
+        "female1_voice",
+        "kobold_voice",
+        "cat_voice"
+    };
+
+    private static bool IsInvalidVoiceId(string? id)
+        => id == null || ValidVoiceIds.Contains(id);
+
+    public static bool Add(string? soundPath, string? id)
+    {
+        if(IsInvalidVoiceId(soundPath))
+        {
+            Plugin.LogError($"Invalid sound path: {soundPath ?? "(null)"}");
+            return false;
+        }
+
+        if(IsInvalidVoiceId(id))
+        {
+            Plugin.LogError($"Error: Voice ID \"{id ?? "(null)"}\" isn't unique!");
+            return false;
+        }
+
         AudioClip voice = SoundManager.LoadAudioClip(soundPath);
-        voice.name = soundId ?? soundPath;
+        voice.name = id ?? soundPath;
         Voices.Add(voice);
+        return true;
     }
+
+    public static bool Add(string? path) => Add(path, path);
 
     [HarmonyPatch(typeof(AudioController), nameof(AudioController.GetAudioClip))]
     [HarmonyPrefix]
