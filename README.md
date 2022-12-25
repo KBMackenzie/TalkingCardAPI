@@ -64,7 +64,7 @@ Your JSON file should look like this:
 
 I'm going to explain each field in detail below.
 
-#### Overview
+### Overview
 
 | Field          | Description                                                                  |
 |----------------|------------------------------------------------------------------------------|
@@ -76,22 +76,30 @@ I'm going to explain each field in detail below.
 | faceInfo       | A bunch of details about your card, which will be explained below.           |
 | dialogueEvents | The dialogue for your card. Will be explained more in depth below.           |
 
-#### FaceInfo
+### FaceInfo
 
 | Field          | Description                                                                  |
 |----------------|------------------------------------------------------------------------------|
 | blinkRate      | How often your character blinks. The higher, the more often they'll blink.   |
 | voiceId        | Your character's "voice". Will explain more below.                           |
 | voiceSondPitch | Your character's voice's pitch. The higher the number, the higher the pitch. |
+| customVoice    | A custom voice for your character. Will be explained below.                  |
 
 "voiceId" can only be one of these three strings:
 1. female1_voice
 2. cat_voice
 3. kobold_voice
-
 Most talking cards in the game use the first and simply change the pitch.
 
-#### DialogueEvents
+#### Custom Voices
+You can add a custom voice to your character instead of using one of the default voices. For that, all you need to is put the path to your audio file in the "customVoice" field.
+
+The supported audio formats are MP3, WAV, OGG and AIFF!
+Please use a very short audio file for your voice. Typically, you want only a very short 'vowel' sound for this, since it's going to be played in rapid repetition.
+
+If you put anything in "customVoice", then the contents of the "voiceId" field will not matter.
+
+### DialogueEvents
 
 The "dialogueEvents" field is an array of dialogue event objects. If you're confused by this, you should use the generator I mentioned above: it makes this step much easier.
 
@@ -123,6 +131,63 @@ The "eventName" field can have the following strings for triggers:
 | LeshyBoss                  | Plays at the beginning of Leshy's boss fight.            |
 | RoyalBoss                  | Plays at the beginning of Royal's boss fight.            |
 | DefaultOpponent            | I am... unsure if this one even works.                   |
+
+# Dialogue Codes
+A really neat feature of Inscryption's dialogue events are 
+
+#### Wait (\[w:])
+This is by far the dialogue code you'll wanna use the most. It's also the one the game itself uses the most in all of its dialogue.
+The "\[w:x]" dialogue code adds a pause of x seconds before the rest of a sentence plays.
+
+You can use it like this:
+```
+"Hello.[w:1] How are you?"
+```
+In this example, after saying "Hello.", the character waits 1 second before saying "How are you?".
+
+The number of seconds does not have to be an integer. Using "\[w:0.2]" to wait only 0.2 seconds is valid, for example, and used often throughout the base game's dialogue.
+
+This being said, I'd advise you not to go below \[w:0.1], as I don't know how small the number can go before issues arise. (And there's no point in going below that, anyhow.)
+
+#### Color (\[c:])
+The \[c:] dialogue code changes the color of a portion of your text.
+You can use it like this:
+```
+"[c:R]This text is red.[c:] This text is not."
+```
+In this example, the part after \[c:R] is colored in the color that matches the code 'R', which is the color red, and the part after \[c:] has the default text color. You can think of this as "switching on" the colorful text mode and then switching it off.
+
+*"But how do I know the codes for each color?"*
+Fear not! Here's a comprehensive table of all available colors and their respective codes:
+
+| Code | Color             |
+|------|-------------------|
+| B    | Blue              |
+| bB   | Bright Blue       |
+| bG   | Bright Gold       |
+| blGr | Bright Lime Green |
+| bR   | Bright Red        |
+| brnO | Brown Orange      |
+| dB   | Dark Blue         |
+| dlGr | Dark Lime Green   |
+| dSG  | Dark Seafoam      |
+| bSG  | Glow Seafoam      |
+| G    | Gold              |
+| gray | Gray              |
+| lGr  | Lime Green        |
+| O    | Orange            |
+| R    | Red               |
+
+(For the record: These are the colors the game has available, built-in. I did not choose them. Yes, it's a very odd selection of colors.)
+
+#### Custom Colors
+I have added a way to use custom colors with dialogue codes. In place of one of the color codes in the table above, you can instead use a [hex color code](https://htmlcolorcodes.com/color-picker/), and this mod will parse the code into an usable Color for the text.
+
+Here's an example:
+```
+"You must be... [w:0.4][c:#7f35e6]confused[c:][w:1].",
+```
+In this example, the word "confused" is colored in the color #7f35e6. Which, if you don't wanna look it up, is [this color!](https://g.co/kgs/JPHV5v)
 
 # Special Thanks
 Special thanks to Nevernamed (Bt Y#0895) on Discord for his help with setting up talking cards! c:
