@@ -67,7 +67,7 @@ Your JSON file should look like this:
 
 I'm going to explain each field in detail below.
 
-If you want to see an example of a \_talk.json file completed filled out, you can look at my [Talking Possum](https://github.com/KBMackenzie/InscryptionJSONDump/blob/main/TalkingPossum/JSON/Possum_talk.json) card.
+If you want to see an example of a \_talk.json file completed filled out, you can look at my [Talking Possum](https://github.com/KBMackenzie/InscryptionJSONDump/blob/main/TalkingPossum/JSON/Possum_talk.json) card. It has an animated portrait, dialogue codes and a custom voice.
 
 ### Overview
 
