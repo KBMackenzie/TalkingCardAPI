@@ -12,7 +12,7 @@ public class Plugin : BaseUnityPlugin
 {   
     public const string PluginGuid = "kel.inscryption.talkingcardapi";
     public const string PluginName = "TalkingCardAPI";
-    public const string PluginVersion = "0.1.0";
+    public const string PluginVersion = "0.1.2";
 
     internal static Plugin? Instance;
 
