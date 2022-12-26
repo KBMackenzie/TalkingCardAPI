@@ -11,7 +11,7 @@ internal static class ColorManager
 {
     private static readonly Dictionary<string, Color> ColorsCache = new();
 
-    private static string[] BaseGameColorIds =
+    private static readonly string[] BaseGameColorIds =
     {
         "B", "bB", "bG", "blGr", "bR", "brnO",
         "dB", "dlGr", "dSG", "bSG", "G",
