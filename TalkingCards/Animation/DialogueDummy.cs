@@ -1,4 +1,5 @@
 ﻿using DiskCardGame;
+using InscryptionAPI.Helpers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,12 @@ internal class DialogueDummy : PaperTalkingCard
     public static List<string> AllDialogueAdded = new();
 
     public const string DUMMY = "___dummy";
+
+    private static DialogueEvent Dummy = DialogueEventGenerator.GenerateEvent(
+            DUMMY,
+            new List<CustomLine>(),
+            new List<List<CustomLine>>()
+        );
 
     public string GetEventForCard(string eventName)
     {
