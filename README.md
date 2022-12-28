@@ -235,3 +235,6 @@ Special thanks to Nevernamed (Bt Y#0895) on Discord for his help with setting up
 This project uses [Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json) for parsing JSON data.
 
 Newtonsoft.Json's license can be found [here](https://github.com/JamesNK/Newtonsoft.Json/blob/master/LICENSE.md).
+
+# Changelog
+- 0.1.2: Fixed softlock on OnDrawn and some other dialogue events when no dialogue for that event was provided.
