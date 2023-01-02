@@ -1,14 +1,12 @@
 ﻿using DiskCardGame;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace TalkingCardAPI.TalkingCards.Create;
 
 // A class that wants to create a talking card through this API *must* implement for this interface.
 // That's all the class needs to do. c:
 
-public interface ITalkingCardBase
+public interface ITalkingCard
 {
     public string CardName { get; }
     public List<EmotionData> Emotions { get; }

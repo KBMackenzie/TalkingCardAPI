@@ -1,10 +1,6 @@
 ﻿using DiskCardGame;
 using HarmonyLib;
-using Mono.Cecil.Cil;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using TalkingCardAPI.TalkingCards.Helpers;
 
 namespace TalkingCardAPI.TalkingCards.Create;

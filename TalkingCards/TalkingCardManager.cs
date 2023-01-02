@@ -1,10 +1,4 @@
-﻿using DiskCardGame;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using TalkingCardAPI.TalkingCards.Animation;
-using TalkingCardAPI.TalkingCards.Create;
+﻿using TalkingCardAPI.TalkingCards.Create;
 
 namespace TalkingCardAPI.TalkingCards;
 
