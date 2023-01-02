@@ -100,7 +100,7 @@ public class EmotionData
         eyesOpenEmission = Emission,
     };
 
-    public static Sprite EmptyPortrait => GeneratePortrait.EmptyCardPortrait ?? new Sprite();
+    public static Sprite EmptyPortrait => GeneratePortrait.EmptyPortrait;
 
     public static implicit operator EmotionData((Emotion emotion, Sprite sprite) x)
         => new(x.emotion, x.sprite, EmptyPortrait, EmptyPortrait, EmptyPortrait);

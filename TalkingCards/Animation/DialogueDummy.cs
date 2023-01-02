@@ -12,7 +12,7 @@ internal class DialogueDummy : PaperTalkingCard
 
     public const string DUMMY = "___dummy";
 
-    private static DialogueEvent Dummy = DialogueEventGenerator.GenerateEvent(
+    private static readonly DialogueEvent _dummyEvent = DialogueEventGenerator.GenerateEvent(
             DUMMY,
             new List<CustomLine>(),
             new List<List<CustomLine>>()

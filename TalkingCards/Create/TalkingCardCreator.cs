@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace TalkingCardAPI.TalkingCards.Create;
 
-public static class TalkingCardCreator
+internal static class TalkingCardCreator
 {
     internal static List<string> AllDialogueAdded => DialogueDummy.AllDialogueAdded;
 
@@ -28,7 +28,7 @@ public static class TalkingCardCreator
         return faceInfo;
     }
 
-    public static void New(FaceData faceData, SpecialTriggeredAbility talkAbility)
+    internal static void New(FaceData faceData, SpecialTriggeredAbility talkAbility)
     {
         if (AnimatedPortraits.ContainsKey(faceData.CardName))
         {
@@ -48,7 +48,7 @@ public static class TalkingCardCreator
 
         // FileLog.Log($"FaceInfo debug: Card: {faceData.CardName}, voicePitch: {face.voiceSoundPitch} , regular voicePitch variable: {faceInfo.voiceSoundPitch}");
 
-        CardInfo? card = LoadCard.Get(faceData.CardName);
+        CardInfo? card = CardHelpers.Get(faceData.CardName);
         if (card == null) return;
 
         AnimatedPortraits.Add(faceData.CardName, portrait);

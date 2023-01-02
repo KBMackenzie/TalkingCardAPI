@@ -14,12 +14,19 @@ internal static class GeneratePortrait
     private static GameObject? FacePrefab;
     private static Transform? APIPortraits;
 
+    #region FaceInfoDefault
     public const string VoiceId = "female1_voice";
     public const float BlinkRate = 1.5f;
     public const float VoicePitch = 1f;
+    #endregion
 
-    public static SpecialTriggeredAbility DialogueAbility;
-    public static Sprite? EmptyCardPortrait;
+    public static SpecialTriggeredAbility DialogueDummy;
+    //public static Sprite? EmptyCardPortrait;
+
+    #region Sprites
+    internal static Sprite EmptyPortrait => AssetHelpers.MakeSprite(new Texture2D(114, 94));
+    internal static (Sprite, Sprite) EmptyPortraitTuple => (EmptyPortrait, EmptyPortrait);
+    #endregion
 
     public static void InitTalkingCards()
     {
@@ -48,7 +55,7 @@ internal static class GeneratePortrait
 
     private static void AddAbility()
     {
-        DialogueAbility = SpecialTriggeredAbilityManager.Add(
+        DialogueDummy = SpecialTriggeredAbilityManager.Add(
                 Plugin.PluginGuid,
                 "TalkingCardAPI_",
                 typeof(DialogueDummy)
@@ -75,23 +82,23 @@ internal static class GeneratePortrait
         face.mouth = Mouth.gameObject.AddComponent<CharacterMouth>();
         face.face = Body.gameObject.GetComponent<SpriteRenderer>();
 
-        EmptyCardPortrait = AssetHelpers.MakeSprite(Properties.Resources.EmptyCardPortrait);
+        //EmptyCardPortrait = AssetHelpers.MakeSprite(Properties.Resources.EmptyCardPortrait);
 
-        face.face.sprite = EmptyCardPortrait;
-        Eyes.GetComponent<SpriteRenderer>().sprite = EmptyCardPortrait;
-        Mouth.GetComponent<SpriteRenderer>().sprite = EmptyCardPortrait;
+        face.face.sprite = EmptyPortrait;
+        Eyes.GetComponent<SpriteRenderer>().sprite = EmptyPortrait;
+        Mouth.GetComponent<SpriteRenderer>().sprite = EmptyPortrait;
 
         face.emotionSprites = new List<CharacterFace.EmotionSprites>
          {
             new CharacterFace.EmotionSprites
             {
                 emotion = Emotion.Neutral,
-                face = EmptyCardPortrait,
-                eyesOpen = EmptyCardPortrait,
-                mouthClosed = EmptyCardPortrait,
-                eyesClosed = EmptyCardPortrait,
-                eyesOpenEmission = EmptyCardPortrait,
-                mouthOpen = EmptyCardPortrait,
+                face = EmptyPortrait,
+                eyesOpen = EmptyPortrait,
+                mouthClosed = EmptyPortrait,
+                eyesClosed = EmptyPortrait,
+                eyesOpenEmission = EmptyPortrait,
+                mouthOpen = EmptyPortrait,
             }};
 
         face.eyes.blinkRate = BlinkRate;
@@ -108,7 +115,7 @@ internal static class GeneratePortrait
         
         face.eyes.emissionRenderer = face.eyes.transform.Find("Emission").GetComponent<SpriteRenderer>();
         face.eyes.emissionRenderer.gameObject.layer = LayerMask.NameToLayer("CardOffscreenEmission");
-        face.eyes.emissionRenderer.sprite = EmptyCardPortrait;
+        face.eyes.emissionRenderer.sprite = EmptyPortrait;
 
         GameObject apiPortraits = new GameObject("API_Portraits");
         GameObject.DontDestroyOnLoad(apiPortraits);

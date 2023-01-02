@@ -24,16 +24,17 @@ internal static class LoadJSON
 
         try
         {
-            TalkingData? talk = JsonConvert.DeserializeObject<TalkingData>(File.ReadAllText(file));
+            TalkingJSONData? talk = JsonConvert.DeserializeObject<TalkingJSONData>(File.ReadAllText(file));
             if (talk == null) return;
             //FileLog.Log($"Loading card: {talk.cardName}");
-            TalkingCardCreator.New(talk.GetFaceData(), GeneratePortrait.DialogueAbility);
+            TalkingCardCreator.New(talk.GetFaceData(), GeneratePortrait.DialogueDummy);
             var dialogueEvents = talk.MakeDialogueEvents();
             dialogueEvents.ForEach(x => TalkingCardCreator.AddToDialogueCache(x?.id));
         }
         catch (Exception)
         {
             Plugin.LogError($"Error loading JSON data from file {Path.GetFileName(file)}!");
+            // Plugin.LogError(ex.ToString());
             // throw;
         }
     }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TalkingCardAPI.TalkingCards.Helpers;
 
-internal class LoadCard
+internal class CardHelpers
 {
     public static CardInfo? Get(string name)
     {
