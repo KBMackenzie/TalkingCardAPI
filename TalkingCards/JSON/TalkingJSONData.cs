@@ -117,7 +117,7 @@ public class EmotionImages
     public EmotionData? MakeEmotion(EmotionData neutralEmotion)
     {
         // Emotion
-        Emotion emotionValue = (Emotion)Enum.Parse(typeof(Emotion), emotion.FormatKey());
+        Emotion emotionValue = (Emotion)Enum.Parse(typeof(Emotion), emotion.SentenceCase());
         if (emotionValue == Emotion.Neutral) return null;
 
         // Sprites

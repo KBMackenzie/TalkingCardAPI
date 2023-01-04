@@ -1,6 +1,8 @@
 ﻿using DiskCardGame;
 using HarmonyLib;
+using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 using TalkingCardAPI.TalkingCards.Helpers;
 
 namespace TalkingCardAPI.TalkingCards.Create;
@@ -9,10 +11,8 @@ namespace TalkingCardAPI.TalkingCards.Create;
 internal static class EmotionManager
 {
     // An accurate list of the names.
-    private static readonly string[] nameOfKeys = EnumHelpers.NameArray<Emotion>();
-
-    // A forgiving, not case-sensitive array of names.
-    private static readonly string[] namesToLower = EnumHelpers.NameArray<Emotion>(toLower: true);
+    private static readonly string[] nameOfKeys = Enum.GetNames(typeof(Emotion));
+    private static Regex emotionRegex = new Regex(@"^\[e\:[a-zA-Z]*\]");
 
     [HarmonyPatch(typeof(SequentialText), nameof(SequentialText.ConsumeCode))]
     [HarmonyPrefix]
@@ -21,7 +21,10 @@ internal static class EmotionManager
         if (!code.StartsWith("[e")) return;
         string x = DialogueParser.GetStringValue(code, "e");
 
-        if (nameOfKeys.Contains(x) || !namesToLower.Contains(x.ToLower())) return;
-        code = code.FormatKey();
+        if (nameOfKeys.Contains(x)) return;
+
+        //FileLog.Log("Before replacing: " + code);
+        code = emotionRegex.Replace(code, $@"[e:{x.SentenceCase()}]");
+        //FileLog.Log("After replacing: " + code);
     }
 }

@@ -1,22 +1,44 @@
 ﻿using BepInEx;
+using HarmonyLib;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 namespace TalkingCardAPI.TalkingCards.Helpers;
 
 internal static class AssetHelpers
 {
+    public static Dictionary<string, Texture2D> TextureCache = new();
+
+    private static readonly Regex WhitespaceRegex = new Regex(@"^\s*$");
+
+    private static readonly Vector2 PIVOT_BOTTOM = new Vector2(0.5f, 0f);
+    private static readonly Vector2 PIVOT_CENTER = new Vector2(0.5f, 0.5f);
+
     public static string? GetFile(string file) => Directory.GetFiles(Paths.PluginPath, file, SearchOption.AllDirectories).FirstOrDefault();
+
+    public static bool IsWhiteSpace(this string str)
+        => WhitespaceRegex.IsMatch(str);
 
     public static Texture2D? MakeTexture(string? path)
     {
-        if (path == null) return null;
+        if (path == null || path.IsWhiteSpace()) return null;
+        
+        if(TextureCache.ContainsKey(path))
+        {
+            //FileLog.Log($"Loading from cache: {path}");
+            return TextureCache[path];
+        }
+
         string? file = Path.IsPathRooted(path) ? path : GetFile(path);
-        return file == null ? null : MakeTexture(File.ReadAllBytes(file));
+        Texture2D? tex = file == null ? null : MakeTexture(File.ReadAllBytes(file));
+
+        if (tex != null) TextureCache.Add(path, tex);
+        return tex;
     }
 
     public static Texture2D MakeTexture(byte[] data)
@@ -41,7 +63,7 @@ internal static class AssetHelpers
     public static Sprite MakeSprite(Texture2D tex)
     {
         Rect texRect = new Rect(0, 0, tex.width, tex.height);
-        Vector2 pivot = new Vector2(0.5f, 0f);
+        Vector2 pivot = PIVOT_BOTTOM;
         return Sprite.Create(tex, texRect, pivot);
     }
 
