@@ -1,6 +1,6 @@
 An Inscryption mod that lets you easily add talking cards with an animated portrait and dialogue all with a JSON file.
 
-![Talking Card Example](https://i.imgur.com/SMtZyY5.gif)
+![Talking Card Example](https://i.imgur.com/U6yeoTh.gif)
 
 This mod is currently in its **beta** stage. There might be bugs. If you have trouble using this mod, please read the [FAQ](#FAQ)! And if the FAQ doesn't help you or your bug isn't mentioned in the FAQ at all, feel free to contact me on Discord: `kelly betty#7936`
 
