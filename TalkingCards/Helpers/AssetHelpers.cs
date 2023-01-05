@@ -12,7 +12,10 @@ namespace TalkingCardAPI.TalkingCards.Helpers;
 
 internal static class AssetHelpers
 {
-    private static readonly Dictionary<string, Texture2D> TextureCache = new();
+    private static readonly Dictionary<string, Texture2D> TextureCache = new()
+    {
+        { "_", EmptyAndTransparent() }
+    };
 
     private static readonly Vector2 PIVOT_BOTTOM = new Vector2(0.5f, 0f);
     private static readonly Vector2 PIVOT_CENTER = new Vector2(0.5f, 0.5f);
@@ -89,5 +92,21 @@ internal static class AssetHelpers
         }
 
         return new(rgb[0], rgb[1], rgb[2], 255);
+    }
+
+    internal static Texture2D EmptyAndTransparent()
+    {
+        Texture2D tex = new Texture2D(114, 94);
+        Color transparent = new Color(0, 0, 0, 0);
+
+        for (int y = 0; y < tex.height; y++)
+        {
+            for (int x = 0; x < tex.width; x++)
+            {
+                tex.SetPixel(x, y, transparent);
+            }
+        }
+        tex.Apply();
+        return tex;
     }
 }

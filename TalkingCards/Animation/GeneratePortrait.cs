@@ -24,8 +24,11 @@ internal static class GeneratePortrait
     //public static Sprite? EmptyCardPortrait;
 
     #region Sprites
-    internal static Sprite EmptyPortrait => AssetHelpers.MakeSprite(new Texture2D(114, 94));
-    internal static (Sprite, Sprite) EmptyPortraitTuple => (EmptyPortrait, EmptyPortrait);
+    internal static readonly Sprite EmptyPortrait
+        = AssetHelpers.MakeSprite(AssetHelpers.EmptyAndTransparent());
+    
+    internal static readonly (Sprite, Sprite) EmptyPortraitTuple
+        = (EmptyPortrait, EmptyPortrait);
     #endregion
 
     public static void InitTalkingCards()
