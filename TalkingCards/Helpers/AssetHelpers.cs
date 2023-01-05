@@ -12,9 +12,9 @@ namespace TalkingCardAPI.TalkingCards.Helpers;
 
 internal static class AssetHelpers
 {
-    public static Dictionary<string, Texture2D> TextureCache = new();
+    private static readonly Dictionary<string, Texture2D> TextureCache = new();
 
-    private static readonly Regex WhitespaceRegex = new Regex(@"^\s*$", RegexOptions.Compiled);
+    private static readonly Regex WhitespaceRegex = new Regex(@"^\s*$");
 
     private static readonly Vector2 PIVOT_BOTTOM = new Vector2(0.5f, 0f);
     private static readonly Vector2 PIVOT_CENTER = new Vector2(0.5f, 0.5f);

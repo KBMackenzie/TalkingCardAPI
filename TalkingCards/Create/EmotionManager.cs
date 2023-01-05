@@ -12,7 +12,7 @@ internal static class EmotionManager
 {
     // An accurate list of the names.
     private static readonly string[] nameOfKeys = Enum.GetNames(typeof(Emotion));
-    private static Regex emotionRegex = new Regex(@"^\[e\:[a-zA-Z]*\]", RegexOptions.Compiled);
+    private static readonly Regex emotionRegex = new Regex(@"^\[e\:[a-zA-Z]*\]");
 
     [HarmonyPatch(typeof(SequentialText), nameof(SequentialText.ConsumeCode))]
     [HarmonyPrefix]
@@ -21,10 +21,7 @@ internal static class EmotionManager
         if (!code.StartsWith("[e")) return;
         string x = DialogueParser.GetStringValue(code, "e");
 
-        if (nameOfKeys.Contains(x)) return;
-
-        //FileLog.Log("Before replacing: " + code);
+        if (nameOfKeys.Contains(x) || int.TryParse(x, out _)) return;
         code = emotionRegex.Replace(code, $@"[e:{x.SentenceCase()}]");
-        //FileLog.Log("After replacing: " + code);
     }
 }
