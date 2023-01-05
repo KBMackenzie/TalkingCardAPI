@@ -21,6 +21,8 @@ internal static class AssetHelpers
 
     public static string? GetFile(string file) => Directory.GetFiles(Paths.PluginPath, file, SearchOption.AllDirectories).FirstOrDefault();
 
+    /* I know about string.IsNullOrWhiteSpace().
+     * I'm defining my own becaue of nullability. */
     public static bool IsWhiteSpace(this string str)
         => WhitespaceRegex.IsMatch(str);
 

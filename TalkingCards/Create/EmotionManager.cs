@@ -11,8 +11,7 @@ namespace TalkingCardAPI.TalkingCards.Create;
 internal static class EmotionManager
 {
     // An accurate list of the names.
-    private static readonly string[] nameOfKeys = Enum.GetNames(typeof(Emotion));
-    private static readonly Regex emotionRegex = new Regex(@"^\[e\:[a-zA-Z]*\]");
+    private static readonly string[] NameOfKeys = Enum.GetNames(typeof(Emotion));
 
     [HarmonyPatch(typeof(SequentialText), nameof(SequentialText.ConsumeCode))]
     [HarmonyPrefix]
@@ -21,7 +20,7 @@ internal static class EmotionManager
         if (!code.StartsWith("[e")) return;
         string x = DialogueParser.GetStringValue(code, "e");
 
-        if (nameOfKeys.Contains(x) || int.TryParse(x, out _)) return;
-        code = emotionRegex.Replace(code, $@"[e:{x.SentenceCase()}]");
+        if (NameOfKeys.Contains(x) || int.TryParse(x, out _)) return;
+        code = $@"[e:{x.SentenceCase()}]";
     }
 }
