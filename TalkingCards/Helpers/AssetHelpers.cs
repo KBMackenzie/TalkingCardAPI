@@ -14,17 +14,10 @@ internal static class AssetHelpers
 {
     private static readonly Dictionary<string, Texture2D> TextureCache = new();
 
-    private static readonly Regex WhitespaceRegex = new Regex(@"^\s*$");
-
     private static readonly Vector2 PIVOT_BOTTOM = new Vector2(0.5f, 0f);
     private static readonly Vector2 PIVOT_CENTER = new Vector2(0.5f, 0.5f);
 
     public static string? GetFile(string file) => Directory.GetFiles(Paths.PluginPath, file, SearchOption.AllDirectories).FirstOrDefault();
-
-    /* I know about string.IsNullOrWhiteSpace().
-     * I'm defining my own becaue of nullability. */
-    public static bool IsWhiteSpace(this string str)
-        => WhitespaceRegex.IsMatch(str);
 
     public static Texture2D? MakeTexture(string? path)
     {

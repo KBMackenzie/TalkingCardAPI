@@ -11,4 +11,9 @@ public static class StringExtensions
 
         return char.ToUpper(key[0]) + key.Substring(1).ToLower();
     }
+
+    /* I know about string.IsNullOrWhiteSpace().
+     * I'm defining my own becaue of nullability. */
+    public static bool IsWhiteSpace(this string str)
+        => str.All(char.IsWhiteSpace);
 }
