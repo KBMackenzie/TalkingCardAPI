@@ -28,12 +28,29 @@
       "description": "A bunch of settings for your character's animated portrait:",
       "$ref": "#/$defs/faceInfo"
     },
+    "emotions": {
+      "description": "Your character's emotions.",
+      "type": "array",
+      "items": {
+        "title": "emotion",
+        "$ref": "#/$defs/emotionData"
+      },
+      "uniqueItems": true
+    },
     "dialogueEvents": {
       "description": "Your character's dialogue events.",
       "$ref": "#/$defs/dialogueEventsArray"
     }
   },
-  "required": ["cardName", "faceSprite"],
+  "required": [
+    "cardName",
+    "faceSprite",
+    "eyeSprites",
+    "mouthSprites",
+    "emissionSprite",
+    "faceInfo",
+    "dialogueEvents"
+  ],
   "$defs": {
     "faceAnim": {
       "type": "object",
@@ -49,7 +66,7 @@
     },
     "imagePath": {
       "type": "string",
-      "pattern": ".*\\.(png|jpg|jpeg|bmp)$"
+      "pattern": "(^_|.*\\.(png|jpg|jpeg|bmp))$"
     },
     "faceInfo": {
       "type": "object",
@@ -109,11 +126,11 @@
           "$ref": "#/$defs/eventNames"
         },
         "mainLines": {
-          "description": "What your character says when it first happens to them.",
+          "description": "What your character says when this event first plays for them.",
           "$ref": "#/$defs/dialogueLines"
         },
         "repeatLines": {
-          "description": "The lines the character says after the first time the event happens.",
+          "description": "The lines the character says after the first time the event has played.",
           "type": "array",
           "items": {
             "title": "repeat lines",
@@ -152,6 +169,34 @@
         "type": "string"
       },
       "minItems": 1
+    },
+    "emotionData": {
+      "type": "object",
+      "properties": {
+        "emotion": {
+          "type": "string",
+          "enum": [
+            "Laughter",
+            "Anger",
+            "Quiet",
+            "Surprise",
+            "Curious"
+          ]
+        },
+        "faceSprite": {
+          "$ref": "#/$defs/imagePath"
+        },
+        "eyeSprites": {
+          "$ref": "#/$defs/faceAnim"
+        },
+        "mouthSprites": {
+          "$ref": "#/$defs/faceAnim"
+        },
+        "emissionSprite": {
+          "$ref": "#/$defs/imagePath"
+        }
+      },
+      "required": [ "emotion" ]
     }
   }
 }
