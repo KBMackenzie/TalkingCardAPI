@@ -15,5 +15,5 @@ public static class StringExtensions
     /* I know about string.IsNullOrWhiteSpace().
      * I'm defining my own becaue of nullability. */
     public static bool IsWhiteSpace(this string str)
-        => str.All(char.IsWhiteSpace);
+        => str.Length == 0 || str.All(char.IsWhiteSpace);
 }

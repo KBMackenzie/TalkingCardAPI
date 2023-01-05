@@ -1,8 +1,10 @@
 An Inscryption mod that lets you easily add talking cards with an animated portrait and dialogue all with a JSON file.
 
-![Talking Card Example](https://i.imgur.com/QePllyT.gif)
+![Talking Card Example](https://i.imgur.com/SMtZyY5.gif)
 
 This mod is currently in its **beta** stage. There might be bugs. If you have trouble using this mod, please read the [FAQ](#FAQ)! And if the FAQ doesn't help you or your bug isn't mentioned in the FAQ at all, feel free to contact me on Discord: `kelly betty#7936`
+
+**\[UPDATE 01.05.22]:** Emotion support has been added! Documentation is [here](#emotions).
 
 # Installation
 This mod’s only dependencies are BepInEx and the InscryptionAPI mod.
@@ -52,6 +54,8 @@ Your JSON file should look like this:
     "voiceSoundPitch": 1,
     "customVoice": ""
   },
+  "emotions": [
+  ],
   "dialogueEvents": [
     {
       "eventName": "OnDrawn",
@@ -79,6 +83,7 @@ If you want to see an example of a \_talk.json file completed filled out, you ca
 | mouthSprites   | The path to the images for your card's mouth: open and closed, respectively. |
 | emissionSprite | The path to an image for your card's eye emission.                           |
 | faceInfo       | A bunch of details about your card, which will be explained below.           |
+| emotions       | Your character's emotion sprites. Explained [here](#emotions).               |
 | dialogueEvents | The dialogue for your card. Will be explained more in depth below.           |
 
 ### Sprite Images
@@ -88,12 +93,12 @@ A good approach to making these face sprites is draw the face, eyes and mouth in
 
 ### FaceInfo
 
-| Field          | Description                                                                  |
-|----------------|------------------------------------------------------------------------------|
-| blinkRate      | How often your character blinks. The higher, the more often they'll blink.   |
-| voiceId        | Your character's "voice". Will explain more below.                           |
-| voiceSondPitch | Your character's voice's pitch. The higher the number, the higher the pitch. |
-| customVoice    | A custom voice for your character. Will be explained below.                  |
+| Field           | Description                                                                  |
+|-----------------|------------------------------------------------------------------------------|
+| blinkRate       | How often your character blinks. The higher, the more often they'll blink.   |
+| voiceId         | Your character's "voice". Will explain more below.                           |
+| voiceSoundPitch | Your character's voice's pitch. The higher the number, the higher the pitch. |
+| customVoice     | A custom voice for your character. Will be explained below.                  |
 
 "voiceId" can only be one of these three strings:
 1. female1_voice
@@ -134,7 +139,7 @@ The "eventName" field can have the following strings for triggers:
 | OnBecomeSelectableNegative | Plays when your card becomes selectable for a negative effect. |
 | OnSacrificed               | Plays when your card is sacrificed.                            |
 | OnSelectedForDeckTrial     | Plays when your card is selected in the deck trial node.       |
-| OnSelectedForCardMerge     | Plays when your card is selected in the sigil (?) node.        |
+| OnSelectedForCardMerge     | Plays before your card receives the sigil in the sigil node.   |
 | OnSelectedForCardRemove    | Plays when your card is selected for removal.                  |
 | OnDiscoveredInExploration  | ... I'm unsure about this one, actually.                       |
 | ProspectorBoss             | Plays at the beginning of the Prospector fight.                |
@@ -220,14 +225,137 @@ There are a few things to note from that example:
 1. You don't need to put quotation marks around the line Leshy is going to say.
 2. The "Wait" dialogue code is still usable with Leshy's lines.
 
+# Emotions
+All of the base game's talking cards have more than one emotion. Emotions are exactly what they sound like: Different facial expressions for a character to convey different emotions.
+
+For those who care about this: Emotions are a C# `enum` in the game's code. This means each item has a numeric value associated with them.
+
+Your character's default emotion is "Neutral". This emotion is added by default.
+
+Anyway, a comprehensive list of all emotions, and the numeric value associated with each:
+
+| Emotion  | Number |
+|----------|--------|
+| Neutral  | 0      |
+| Laughter | 1      |
+| Anger    | 2      |
+| Quiet    | 3      |
+| Surprise | 4      |
+| Curious  | 5      |
+
+There's another item in the Emotion enum, "None", but you should probably not use it.
+
+To learn how to add emotions, see [this section](#adding-emotions).
+To learn how to use emotions, see [this section](#using-emotions).
+
+### Adding Emotions
+You can include new Emotions for your card by adding them to the "emotions" array in your JSON file. This is what that should look like:
+
+```json
+"emotions": [
+  {
+    "emotion": "Anger",
+    "faceSprite": "Example_AngryFace.png",
+    "eyeSprites": {
+      "open": "Example_AngryEyes_Open.png",
+      "closed": "Example_AngryEyes_Closed.png"
+    },
+    "mouthSprites": {
+      "open": "Example_AngryMouth_Open.png",
+      "closed": "Example_AngryMouth_Closed.png"
+    },
+    "emissionSprite": "Example_AngryEmission.png"
+  }
+]
+```
+
+In the example above, a new emotion is added, "Anger", which changes the sprites for the character's face.
+
+The "emotion" field should contain the name of a valid emotion. (See the table above!)
+
+#### "Do I have to replace every sprite?"
+You don't have to replace every single sprite when you make an emotion!
+
+You can change only the fields you want to, and leave out the fields you don't want to change. The fields you leave out are ignored, and they "default" to the Neutral emotion's sprites for those fields.
+
+See this example:
+
+```json
+"emotions": [
+  {
+    "emotion": "Anger",
+    "eyeSprites": {
+      "open": "Example_AngryEyes_Open.png",
+      "closed": "Example_AngryEyes_Closed.png"
+    },
+    "emissionSprite": "Example_AngryEmission.png"
+  }
+]
+```
+
+In that example above, only the sprites for the eyes and eye emission are changed. The sprites for the face and mouth stay the same; that is, they default to the Neutral emotion's face and mouth sprites.
+
+If you're still confused about how this works, I advise you use the JSON Generator I linked above. I wrote the schema for it myself, and it should help you with creating emotions (and everything else). You can even choose to toggle optional fields on and off, which is specially handy for emotions!
+
+#### Side Note: Re-using Images
+*"I want to re-use the same image multiple times! Will that affect performance?"*
+
+This mod implements a little texture cache, so an image is always only loaded once regardless of how many times you use it in your JSON file. Because of this, you *don't* have to worry about using the same image multiple times.
+
+This means if you *really want* to use the same image for a character's eyes across multiple emotions (and even across multiple characters), you can do so without fear of it affecting performance. 
+
+#### Side Note: Empty Texture
+You can add an 'empty'/fully transparent texture to a field if you wish, 'hiding' that field for a given emotion. This mod adds shorthand for that: "\_" (an underscore) in the image field.
+
+Here's an example:
+```json
+{
+  "emotion": "Quiet",
+  "eyeSprites": {
+    "open": "Example_EyesClosed.png",
+    "closed": "Example_EyesClosed.png"
+  },
+  "emissionSprite": "_"
+}
+```
+
+In that example, the emission is replaced by an empty texture, and is thus not displayed at all.
+
+This has lot of uses: Hiding a character's eyes for one emotion, hiding emissions for one emotion, et cetera.
+
+### Using Emotions
+You can change your character's emotion in their dialogue lines, with the dialogue code `[e:x]`, where 'x' is the name of an emotion. You can look at the table above for the names of all the available emotions.
+
+This mod adds patches to make the emotion names not case-sensitive, which means the following lines are all equally valid:
+
+```
+"[e:Anger]I'm angry."
+"[e:anger]I'm angry."
+"[e:AnGeR]I'm angry and my keyboard is acting up."
+```
+
+If you prefer, you can use the numeric value associated with an emotion instead of its name! This is perfectly valid, for example:
+
+```
+"[e:2]I'm angry."
+```
+
 # FAQ
 
-**Q:** *"I'm getting an error that says my \_talk.json file couldn't be loaded! What does this mean?"
+**Q:** *"I'm getting an error that says my \_talk.json file couldn't be loaded! What does this mean?"*
 
 **A:** Please double check your file and make sure you didn't make any mistakes with the JSON syntax.
 
 There are multiple JSON validator tools you can use online that catch syntax errors and things of the sort. A favorite of mine is [JSONLint](https://jsonlint.com/).
 
+
+# Changelog
+- **0.2.0**: Major changes:
+  - Added support for emotions!
+  - Updated the JSON schema in the generator to now include emotions.
+  - Fixed a bug with custom color codes that happened when those were used mid-sentence.
+- **0.1.2**: - Fixed softlock on OnDrawn and some other dialogue events when no dialogue for that event was provided.
+- **0.1.0**: - Initial upload.
 # Special Thanks
 Special thanks to Nevernamed (Bt Y#0895) on Discord for his help with setting up talking cards! c:
 
@@ -235,7 +363,3 @@ Special thanks to Nevernamed (Bt Y#0895) on Discord for his help with setting up
 This project uses [Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json) for parsing JSON data.
 
 Newtonsoft.Json's license can be found [here](https://github.com/JamesNK/Newtonsoft.Json/blob/master/LICENSE.md).
-
-# Changelog
-- **0.1.2**: - Fixed softlock on OnDrawn and some other dialogue events when no dialogue for that event was provided.
-- **0.1.0**: - Initial upload.
