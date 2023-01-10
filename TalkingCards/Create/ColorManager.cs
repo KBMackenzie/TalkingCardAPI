@@ -12,14 +12,7 @@ internal static class ColorManager
 {
     private static readonly Dictionary<string, Color> ColorsCache = new();
 
-    private static readonly Regex EmotionRegex = new(@"^#?([0-9a-fA-F]{6})$");
-
-    //private static readonly string[] BaseGameColorIds =
-    //{
-    //    "B", "bB", "bG", "blGr", "bR", "brnO",
-    //    "dB", "dlGr", "dSG", "bSG", "G",
-    //    "gray", "lGr", "O", "R", "g2", "g3", "g1"
-    //};
+    private static readonly Regex ColorRegex = new(@"^#?([0-9a-fA-F]{6})$");
 
     [HarmonyPatch(typeof(DialogueParser), nameof(DialogueParser.GetColorFromCode))]
     [HarmonyPostfix]
@@ -27,7 +20,7 @@ internal static class ColorManager
     {
         string hex = DialogueParser.GetStringValue(code, "c");
         
-        if (!EmotionRegex.IsMatch(hex)) return;
+        if (!ColorRegex.IsMatch(hex)) return;
 
         if (ColorsCache.ContainsKey(hex))
         {

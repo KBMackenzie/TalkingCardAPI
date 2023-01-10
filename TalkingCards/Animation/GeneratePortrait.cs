@@ -39,16 +39,14 @@ internal static class GeneratePortrait
     }
 
 #pragma warning disable CS8600
-#pragma warning disable CS8603
     public static GameObject New()
     {
         GameObject portrait = GameObject.Instantiate(FacePrefab);
         GameObject.DontDestroyOnLoad(portrait);
-        //portrait!.transform.SetParent(APIPortraits);
+        portrait!.transform.SetParent(APIPortraits);
         return portrait;
     }
 #pragma warning restore CS8600
-#pragma warning restore CS8603
 
     #region InitGenericPortrait
     private static void LoadPrefab()
