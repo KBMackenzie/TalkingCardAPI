@@ -13,7 +13,7 @@ public abstract class PartOneTalkingCard : PaperTalkingCard, ITalkingCard
     public abstract List<EmotionData> Emotions { get; }
     public abstract FaceInfo FaceInfo { get; }
     public abstract SpecialTriggeredAbility DialogueAbility { get; }
-
+    public override string OnDrawnFallbackDialogueId => OnDrawnDialogueId;
     public override IEnumerator OnShownForCardSelect(bool forPositiveEffect)
     {
         yield return new WaitForEndOfFrame();

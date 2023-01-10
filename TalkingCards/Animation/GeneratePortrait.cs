@@ -21,7 +21,6 @@ internal static class GeneratePortrait
     #endregion
 
     public static SpecialTriggeredAbility DialogueDummy;
-    //public static Sprite? EmptyCardPortrait;
 
     #region Sprites
     internal static readonly Sprite EmptyPortrait
@@ -61,16 +60,11 @@ internal static class GeneratePortrait
                 "TalkingCardAPI_",
                 typeof(DialogueDummy)
             ).Id;
-
-        //DialogueDummy.DummyEvent();
     }
 
     private static void Portrait()
     {
         FacePrefab = PortraitBundle!.LoadAsset<GameObject>("TalkingCardGenericPrefab");
-
-        /* No need for a global static variable if you don't destroy on load! ><
-         * I can use this to allow for unique card customizations from one prefab! <3 */
 
         Transform Anim = FacePrefab.transform.Find("Anim");
         Transform Body = Anim.transform.Find("Body");
@@ -82,8 +76,6 @@ internal static class GeneratePortrait
         face.eyes = Eyes.gameObject.AddComponent<CharacterEyes>();
         face.mouth = Mouth.gameObject.AddComponent<CharacterMouth>();
         face.face = Body.gameObject.GetComponent<SpriteRenderer>();
-
-        //EmptyCardPortrait = AssetHelpers.MakeSprite(Properties.Resources.EmptyCardPortrait);
 
         face.face.sprite = EmptyPortrait;
         Eyes.GetComponent<SpriteRenderer>().sprite = EmptyPortrait;

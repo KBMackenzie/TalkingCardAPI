@@ -28,7 +28,7 @@ public class FaceInfo
     private static string[] ValidVoiceIds => VoiceManager.ValidVoiceIds;
 
     /* Yes, I know these names should be capitalized.
-     * However... JSON. */
+     * However, camelCase looks better in JSON files, so I'm gonna make this compromise. :'3 */
 
     public float? blinkRate { get; set; }
     public string? voiceId { get; set; }
