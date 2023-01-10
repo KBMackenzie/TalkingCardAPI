@@ -49,9 +49,6 @@ public class FaceInfo
     public float GetVoicePitch()
         => Mathf.Clamp(voiceSoundPitch ?? GeneratePortrait.VoicePitch, 0.1f, 10f);
 
-    private bool IsValidVoiceId(string? id)
-        => id != null && ValidVoiceIds.Contains(id);
-
     private string? CustomVoice()
     {
         bool result = VoiceManager.Add(customVoice);
@@ -108,7 +105,7 @@ public class EmotionData
 
 public class FaceAnim
 {
-    // These sprites will *never* be null.
+    // These sprites should *never* be null.
     // They can, however, be just empty sprites.
     public Sprite Open { get; }
     public Sprite Closed { get; }
