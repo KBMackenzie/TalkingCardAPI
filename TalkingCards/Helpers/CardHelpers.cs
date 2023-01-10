@@ -16,7 +16,7 @@ internal class CardHelpers
         }
         catch (Exception)
         {
-            Plugin.LogError($"Couldn't find a card of name {name}!");
+            Plugin.LogError($"Couldn't find a card of name {name ?? "(null)"}!");
             return null;
         }
         return card;

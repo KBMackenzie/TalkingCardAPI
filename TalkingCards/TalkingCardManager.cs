@@ -1,4 +1,7 @@
-﻿using TalkingCardAPI.TalkingCards.Create;
+﻿using DiskCardGame;
+using System.Collections.Generic;
+using TalkingCardAPI.TalkingCards.Create;
+using TalkingCardAPI.TalkingCards.Helpers;
 
 namespace TalkingCardAPI.TalkingCards;
 
@@ -6,6 +9,11 @@ public static class TalkingCardManager
 {
     // Add a talking card created through this API.
     // I'm using an interface so that it can all be kept in the same class. c:
+
+    /// <summary>
+    /// Creates a talking card through this API.
+    /// </summary>
+    /// <typeparam name="T">A type that implements the ITalkingCard interface.</typeparam>
     public static void New<T>() where T : ITalkingCard, new()
     {
         ITalkingCard x = new T();
@@ -19,14 +27,14 @@ public static class TalkingCardManager
         TalkingCardCreator.New(faceData, x.DialogueAbility);
     }
 
-    ///// <summary>
-    ///// Register a talking card.
-    ///// </summary>
-    ///// <param name="faceData">Your talking card's face.</param>
-    ///// <param name="script">The <c>SpecialTriggeredAbility</c> that holds your talking card's dialogue.</param>
-    //public static void New(FaceData faceData, SpecialTriggeredAbility script)
-    //{
-    //    Plugin.LogInfo($"Registering talking card {faceData.CardName}!");
-    //    TalkingCardCreator.New(faceData, script);
-    //}
+    /// <summary>
+    /// Create a talking card from a FaceData instance through this API.
+    /// </summary>
+    /// <param name="faceData">Your character's face data.</param>
+    /// <param name="ability">The ability containing your character's dialogue events.</param>
+    public static void Create(FaceData faceData, SpecialTriggeredAbility ability)
+    {
+        if (faceData?.CardName == null) return;
+        TalkingCardCreator.New(faceData, ability);
+    }
 }
