@@ -1,3 +1,9 @@
+# Important
+Starting at version 2.9.0 of the [Inscryption API](https://inscryption.thunderstore.io/package/API_dev/API/), support for talking cards is already included in the API itself.
+
+Starting at version 2.3.0 of [JSONCardLoader](https://inscryption.thunderstore.io/package/MADH95Mods/JSONCardLoader/), support for talking cards through JSON is already included, so there's no need to use this mod alongside it. All talking cards created with this mod are also backwards compatible with JSONCardLoader.
+
+# Description
 An Inscryption mod that lets you easily add talking cards with an animated portrait and dialogue all with a JSON file.
 
 ![Talking Card Example](https://i.imgur.com/oe779Ar.gif)
@@ -350,6 +356,7 @@ There are multiple JSON validator tools you can use online that catch syntax err
 
 
 # Changelog
+- **0.2.1**: Added 'Important' note at the top, and made small changes in preparation to the new API/JSONCardLoader update.
 - **0.2.0**: Major changes:
   - Added support for emotions!
   - Updated the JSON schema in the generator to now include emotions.
