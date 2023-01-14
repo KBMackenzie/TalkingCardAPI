@@ -23,7 +23,17 @@ public class Plugin : BaseUnityPlugin
         Harmony harmony = new Harmony("kel.harmony.talkingcardapi");
         harmony.PatchAll();
 
-        GeneratePortrait.InitTalkingCards();
+        try
+        {
+            GeneratePortrait.InitTalkingCards();
+        }
+        catch (System.Exception)
+        {
+            Logger.LogWarning("Exception caught: This probably just means you're using a newer version of the API, in which case, you don't need to use this mod.");
+            Logger.LogWarning("The latest version of the API already includes support for Talking Cards! You can use JSONLoader instead of this mod now!");
+            return;
+        }
+
         LoadJSON.LoadJSONCards();
     }
 
