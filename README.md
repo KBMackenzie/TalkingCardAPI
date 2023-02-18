@@ -1,5 +1,5 @@
 # Important
-Starting at version 2.9.0 of the [Inscryption API](https://inscryption.thunderstore.io/package/API_dev/API/), support for talking cards is already included in the API itself.
+Starting at version 2.9.0 of the [Inscryption API](https://inscryption.thunderstore.io/package/API_dev/API/), support for talking cards is already included in the API itself. I worked on including it myself, so compatibility should remain.
 
 Starting at version 2.3.0 of [JSONCardLoader](https://inscryption.thunderstore.io/package/MADH95Mods/JSONCardLoader/), support for talking cards through JSON is already included, so there's no need to use this mod alongside it. All talking cards created with this mod are also backwards compatible with JSONCardLoader.
 
